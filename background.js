@@ -20,37 +20,45 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     changeInfo.status === "complete" &&
     tab.url.startsWith(TARGET_URL_PREFIX)
   ) {
-    chrome.scripting.executeScript(
-      {
-        target: { tabId: tabId },
-        func: collectListingIds,
-      },
-      (results) => {
-        if (chrome.runtime.lastError || !results || !results[0]) return;
+    const url = new URL(tab.url);
+    const params = url.searchParams;
+    if (params.get("sorting") && params.get("sorting") === "2") {
+      chrome.scripting.executeScript(
+        {
+          target: { tabId: tabId },
+          func: collectListingIds,
+        },
+        (results) => {
+          if (chrome.runtime.lastError || !results || !results[0]) return;
 
-        const titleById = results[0].result;
-        const newIds = new Set(Object.keys(titleById)); // IDs found in the page
-        const prevIds = tabListingsMap.get(tabId) || new Set();
+          const titleById = results[0].result;
+          const newIds = new Set(Object.keys(titleById)); // IDs found in the page
+          const prevIds = tabListingsMap.get(tabId) || new Set();
 
-        const addedIds = newIds.difference(prevIds);
+          const addedIds = newIds.difference(prevIds);
 
-        console.log(new Date().toLocaleString(), addedIds, prevIds.size);
-        if (addedIds.size > 0 && prevIds.size > 0) {
-          console.log(`‼️ ${addedIds.size} new listings`, addedIds);
-          const titles = [...addedIds].map((id) => titleById[id]);
-          showNotification(
-            tabId,
-            `${addedIds.size} ${addedIds.size === 1 ? "neue Anzeige" : "neue Anzeigen"}`,
-            titles.join(" · "),
-          );
-        } else {
-          console.log("no new listings", prevIds);
-        }
+          console.log(new Date().toLocaleString());
+          if (addedIds.size > 0 && prevIds.size > 0) {
+            console.info(`‼️ ${addedIds.size} new listings`, addedIds);
+            const titles = [...addedIds].map((id) => titleById[id]);
+            showNotification(
+              tabId,
+              `${addedIds.size} ${addedIds.size === 1 ? "neue Anzeige" : "neue Anzeigen"}`,
+              titles.join(" · "),
+            );
+          } else {
+            console.log("no new listings", prevIds);
+          }
 
-        // Update stored IDs
-        tabListingsMap.set(tabId, newIds.union(prevIds));
-      },
-    );
+          // Update stored IDs
+          tabListingsMap.set(tabId, newIds.union(prevIds));
+        },
+      );
+    } else {
+      console.info("fixed sorting");
+      params.set("sorting", "2");
+      chrome.tabs.update(tabId, { url: url.toString() });
+    }
   }
 });
 
