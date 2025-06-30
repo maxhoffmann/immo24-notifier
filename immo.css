@@ -1,0 +1,12 @@
+.HybridViewMain__Listings {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+[data-elementtype="hybridViewCardContainer"] {
+  grid-template-columns: repeat(3, calc(33.33333% - 21.33333px)) !important;
+}
+
+.HybridView_MapView_Desktop {
+  display: none !important;
+}

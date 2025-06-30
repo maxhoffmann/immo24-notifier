@@ -1,0 +1,36 @@
+{
+    "name": "Immo24 Notifier",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "Immo24 Notifier extension by Maximilian Hoffmann",
+    "homepage_url": "https://github.com/maxhoffmann/immo-extension",
+    "permissions": [
+      "tabs",
+      "notifications",
+      "scripting"
+    ],
+    "host_permissions": [
+      "https://www.immobilienscout24.de/*"
+    ],
+    "icons": {
+      "16": "icon-16.png",
+      "19": "icon-19.png",
+      "38": "icon-38.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    },
+    "action": {
+      "default_title": "Immo24 Notifier",
+      "default_icon": "icon-128.png",
+      "default_popup": "popup.html"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.immobilienscout24.de/*"],
+            "css": ["immo.css"]
+        }
+    ]
+}

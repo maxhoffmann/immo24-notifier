@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <title>ImmoScout Notifier</title>
+    <meta charset="utf-8">
+    <script src="popup.js"></script>
+    <style>
+      html {
+        width: 320px;
+      }
+      h2 {
+        font-size: 14px;
+      }
+      p {
+        font-size: 11px;
+      }
+      details {
+        margin-block-start: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>So geht’s:</h2>
+    <p>
+      Öffne einen oder mehrere Tabs mit einer Suche auf immoscout24.de.
+      Die Erweiterung lädt die Tabs alle 10 Sekunden neu und sendet eine Benachrichtigung, falls neue Anzeigen erscheinen.
+      Das funktioniert auch, wenn die Tabs im Hintergrund geöffnet sind und man auf anderen Seiten surft.
+    </p>
+    <hr>
+    <h2>Klicke hier, um Benachrichtigungen zu testen:</h2>
+    <button>Benachrichtung testen</button>
+    <details>
+      <summary>keine Benachrichtigung erschienen?</summary>
+      <p>
+        Falls beim Klick auf den Button keine Benachrichtigung erscheint, fehlen dem Browser die Berechtigungen Benachrichtigungen zu schicken.
+        Schau in deinen Browser- oder Systemeinstellungen nach und aktiviere Benachrichtigungen für deinen Browser.
+      </p>
+    </details>
+  </body>
+</html>
