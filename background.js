@@ -32,7 +32,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
           if (chrome.runtime.lastError || !results || !results[0]) return;
 
           const titleById = results[0].result;
-          const newIds = new Set(Object.keys(titleById)); // IDs found in the page
+          const newIds = new Set(Object.keys(titleById ?? {})); // IDs found in the page
           const prevIds = tabListingsMap.get(tabId) || new Set();
 
           const addedIds = newIds.difference(prevIds);
