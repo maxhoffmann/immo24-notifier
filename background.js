@@ -28,7 +28,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       (results) => {
         if (chrome.runtime.lastError || !results || !results[0]) return;
 
-        const newIds = new Set(results[0].result); // IDs found in the page
+        const titleById = results[0].result;
+        const newIds = new Set(Object.keys(titleById)); // IDs found in the page
         const prevIds = tabListingsMap.get(tabId) || new Set();
 
         const addedIds = newIds.difference(prevIds);
@@ -36,14 +37,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         console.log(new Date().toLocaleString(), addedIds, prevIds.size);
         if (addedIds.size > 0 && prevIds.size > 0) {
           console.log(`‼️ ${addedIds.size} new listings`, addedIds);
-          const titles = [...addedIds].map(
-            (id) =>
-              document.querySelector(`[data-exp-id="${id}"] h2`).innerText,
-          );
+          const titles = [...addedIds].map((id) => titleById[id]);
           showNotification(
             tabId,
             `${addedIds.size} ${addedIds.size === 1 ? "neue Anzeige" : "neue Anzeigen"}`,
-            titles.join(" | "),
+            titles.join(" · "),
           );
         } else {
           console.log("no new listings", prevIds);
@@ -76,9 +74,12 @@ chrome.notifications.onClicked.addListener(async (notificationId) => {
 function collectListingIds() {
   return Array.from(
     document.querySelectorAll('[data-testid="ListingsGrid"] [data-obid]'),
-  )
-    .map((el) => el.getAttribute("data-obid"))
-    .filter(Boolean);
+  ).reduce((acc, el) => {
+    const id = el.getAttribute("data-obid");
+    const title = el.querySelector(`[data-exp-id="${id}"] h2`).innerText;
+    acc[id] = title;
+    return acc;
+  }, {});
 }
 
 // Show notification from service worker
