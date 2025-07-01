@@ -99,5 +99,6 @@ async function showNotification(tabId, title, message) {
     iconUrl: "icon-48.png",
     title: title,
     message: message,
+    requireInteraction: true,
   });
 }
