@@ -27,3 +27,7 @@ This is a browser extension for Chromium based browsers ([Vivaldi](https://vival
 7. click on the extension icon in the toolbar of your browser
 8. click the button in the popup window to test if your browser can send notifications
 9. open one or more tabs with searches on [immobilienscout24.de](https://www.immobilienscout24.de) and get notified
+
+## How to update
+
+Follow steps 4 to 9 of the installation process above again.
