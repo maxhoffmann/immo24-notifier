@@ -19,7 +19,7 @@ This is a browser extension for Chromium based browsers ([Vivaldi](https://vival
 
 ## Installation
 
-1. open `chrome://extensions`
+1. open the URL `chrome://extensions` in the browser address bar
 2. enable `developer mode` in the top right corner
 4. on GitHub download this repository by clicking on the green `<> Code` button and then on `Download Zip`
 5. extract the zip on your computer to get the folder of the extension
