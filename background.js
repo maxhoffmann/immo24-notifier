@@ -94,7 +94,7 @@ function collectListingIds() {
 async function showNotification(tabId, title, message) {
   await chrome.notifications.create("immo24:" + tabId, {
     type: "basic",
-    iconUrl: "immo.jpg",
+    iconUrl: "icon-48.png",
     title: title,
     message: message,
   });
