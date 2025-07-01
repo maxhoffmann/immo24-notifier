@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "x neue Anzeigen!",
       message: "auf ImmoScout24",
       iconUrl: "icon-48.png",
+      requireInteraction: true,
     });
   });
 });
