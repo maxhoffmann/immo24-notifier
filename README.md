@@ -22,3 +22,6 @@ This is a browser extension for Chromium based browsers (Vivaldi, Arc, Chrome…
 4. on GitHub download this repository by clicking on the green `<> Code` button and then on `Download Zip`
 5. extract the zip on your computer to get the folder of the extension
 6. drag and drop the folder onto the tab in your browser, that has `chrome://extensions` open
+7. click on the extension icon in the toolbar of your browser
+8. click the button in the popup window to test if your browser can send notifications
+9. open one or more tabs with searches on [immobilienscout24.de](https://www.immobilienscout24.de) and get notified
