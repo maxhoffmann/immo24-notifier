@@ -9,6 +9,8 @@ This is a browser extension for Chromium based browsers (Vivaldi, Arc, Chrome…
 - works when tabs are in the background
 - makes sure listing are sorted by latest
 - only reloads search pages, not the pages of single listing
+- previews the listing title in notifications
+- clicking on a notification focuses the tab with the new listing
 
 ## Visual improvements
 
