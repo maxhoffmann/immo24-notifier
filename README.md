@@ -1,6 +1,6 @@
 # Immo24 Notifier
 
-This is a browser extension for Chromium based browsers (Vivaldi, Brave, Edge, Chrome…) to get notified, when new listings on [immobilienscout24.de](https://www.immobilienscout24.de) were posted.
+This is a browser extension for Chromium based browsers ([Vivaldi](https://vivaldi.com/download/), [Brave](https://brave.com/download/), Edge, Chrome…) to get notified, when new listings on [immobilienscout24.de](https://www.immobilienscout24.de) were posted.
 
 
 ## Features
