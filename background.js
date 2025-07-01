@@ -84,8 +84,10 @@ function collectListingIds() {
     document.querySelectorAll('[data-testid="ListingsGrid"] [data-obid]'),
   ).reduce((acc, el) => {
     const id = el.getAttribute("data-obid");
-    const title = el.querySelector(`[data-exp-id="${id}"] h2`).innerText;
-    acc[id] = title;
+    const title = el.querySelector(`[data-exp-id="${id}"] h2`)?.innerText;
+    if (id && title) {
+      acc[id] = title;
+    }
     return acc;
   }, {});
 }
