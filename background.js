@@ -41,10 +41,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
           if (addedIds.size > 0 && prevIds.size > 0) {
             console.info(`‼️ ${addedIds.size} new listings`, addedIds);
             const ids = [...addedIds];
+            const now = new Date();
+            const time = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
             for (const id of ids) {
               showNotification(
                 id,
-                `Neue Anzeige (${id})`,
+                `[${time}] Neue Anzeige ${id}`,
                 titleById[id] ?? '(keine Beschreibung)',
               );
             }

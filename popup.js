@@ -17,21 +17,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.querySelector("#test-example").addEventListener("click", async () => {
+    const now = new Date();
+    const time = `${new Date().getHours().toString().padStart(2, "0")}:${new Date().getMinutes().toString().padStart(2, "0")}`;
     await chrome.notifications.create({
       type: "basic",
       iconUrl: "icon-48.png",
-      title: "x neue Anzeigen!",
+      title: `[${time}] Test-Anzeige XXXXXXXXX`,
       message: "auf ImmoScout24",
       requireInteraction: true,
     });
   });
   document.querySelector("#test-one").addEventListener("click", async () => {
     const firstExposeId = firstExpose.value;
+    const now = new Date();
+    const time = `${new Date().getHours().toString().padStart(2, "0")}:${new Date().getMinutes().toString().padStart(2, "0")}`;
 
     await chrome.notifications.create("immo24:" + firstExposeId, {
       type: "basic",
       iconUrl: "icon-48.png",
-      title: "Test-Anzeige: "+firstExposeId,
+      title: `[${time}] Test-Anzeige ${firstExposeId}`,
       message: "auf ImmoScout24",
       requireInteraction: true,
     });
@@ -39,18 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#test-multiple").addEventListener("click", async () => {
     const firstExposeId = firstExpose.value;
     const secondExposeId = secondExpose.value;
+    const now = new Date();
+    const time = `${new Date().getHours().toString().padStart(2, "0")}:${new Date().getMinutes().toString().padStart(2, "0")}`;
 
     chrome.notifications.create("immo24:" + firstExposeId, {
       type: "basic",
       iconUrl: "icon-48.png",
-      title: "Test-Anzeige: "+firstExposeId,
+      title: `[${time}] Test-Anzeige ${firstExposeId}`,
       message: "auf ImmoScout24",
       requireInteraction: true,
     });
     chrome.notifications.create("immo24:" + secondExposeId, {
       type: "basic",
       iconUrl: "icon-48.png",
-      title: "Test-Anzeige: "+secondExposeId,
+      title: `[${time}] Test-Anzeige ${secondExposeId}`,
       message: "auf ImmoScout24",
       requireInteraction: true,
     });
