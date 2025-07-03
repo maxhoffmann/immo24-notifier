@@ -40,12 +40,14 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
           console.log(new Date().toLocaleString());
           if (addedIds.size > 0 && prevIds.size > 0) {
             console.info(`‼️ ${addedIds.size} new listings`, addedIds);
-            const titles = [...addedIds].map((id) => titleById[id]);
-            showNotification(
-              tabId,
-              `${addedIds.size} ${addedIds.size === 1 ? "neue Anzeige" : "neue Anzeigen"}`,
-              titles.join(" · "),
-            );
+            const ids = [...addedIds];
+            for (const id of ids) {
+              showNotification(
+                id,
+                `${addedIds.size} ${addedIds.size === 1 ? "neue Anzeige" : "neue Anzeigen"}`,
+                titleById[id],
+              );
+            }
           } else {
             console.log("no new listings", prevIds);
           }
@@ -65,11 +67,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.notifications.onClicked.addListener(async (notificationId) => {
   const prefix = "immo24:";
   if (notificationId.startsWith(prefix)) {
-    const tabId = parseInt(notificationId.slice(prefix.length), 10);
-    if (!isNaN(tabId)) {
+    const exposeId = parseInt(notificationId.slice(prefix.length), 10);
+    if (!isNaN(exposeId)) {
       try {
-        const tab = await chrome.tabs.get(tabId);
-        await chrome.tabs.update(tabId, { active: true });
+        const tab = await chrome.tabs.create({
+          url: `https://www.immobilienscout24.de/expose/${exposeId}`,
+        });
         await chrome.windows.update(tab.windowId, { focused: true });
       } catch (err) {
         console.error("Failed to focus tab", err);
@@ -93,8 +96,8 @@ function collectListingIds() {
 }
 
 // Show notification from service worker
-async function showNotification(tabId, title, message) {
-  await chrome.notifications.create("immo24:" + tabId, {
+async function showNotification(exposeId, title, message) {
+  await chrome.notifications.create("immo24:" + exposeId, {
     type: "basic",
     iconUrl: "icon-48.png",
     title: title,
