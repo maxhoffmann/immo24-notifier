@@ -14,6 +14,12 @@
       p {
         font-size: 11px;
       }
+      .form {
+        margin-block-start: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
       details {
         margin-block-start: 1rem;
       }
@@ -27,14 +33,23 @@
       Das funktioniert auch, wenn die Tabs im Hintergrund geöffnet sind und man auf anderen Seiten surft.
     </p>
     <hr>
-    <h2>Klicke hier, um Benachrichtigungen zu testen:</h2>
-    <button>Benachrichtung testen</button>
+    <h2>Klicke hier, um eine Benachrichtigung zu testen:</h2>
+    <button id="test-example">Benachrichtung testen</button>
     <details>
       <summary>keine Benachrichtigung erschienen?</summary>
       <p>
         Falls beim Klick auf den Button keine Benachrichtigung erscheint, fehlen dem Browser die Berechtigungen Benachrichtigungen zu schicken.
         Schau in deinen Browser- oder Systemeinstellungen nach und aktiviere Benachrichtigungen für deinen Browser.
       </p>
+    </details>
+    <details>
+      <summary>Debug</summary>
+      <div class="form">
+        <input type="text" name="expose1" id="expose1" placeholder="Expose ID 1">
+        <input type="text" name="expose2" id="expose2" placeholder="Expose ID 2">
+        <button id="test-one">Eine Benachrichtung testen</button>
+        <button id="test-multiple">Mehrere Benachrichtungen testen</button>
+      </div>
     </details>
   </body>
 </html>

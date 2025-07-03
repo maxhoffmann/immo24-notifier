@@ -44,8 +44,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             for (const id of ids) {
               showNotification(
                 id,
-                `${addedIds.size} ${addedIds.size === 1 ? "neue Anzeige" : "neue Anzeigen"}`,
-                titleById[id],
+                `Neue Anzeige (${id})`,
+                titleById[id] ?? '(keine Beschreibung)',
               );
             }
           } else {
